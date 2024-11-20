@@ -3,14 +3,14 @@ name: CI
 on:
   push:
     branches:
-      - main  # Запускать CI при пуше в ветку main (можно изменить)
+      - main  # Run on pushes to the main branch (or whichever branch you prefer)
   pull_request:
     branches:
-      - main  # Запускать CI при создании pull request в ветку main (можно изменить)
+      - main  # Run on pull requests to the main branch (or whichever branch you prefer)
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # You can choose another operating system here
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -18,7 +18,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
-          python-version: '3.10' # Или нужная вам версия Python
+          python-version: "3.11" # Specify your Python version here
 
       - name: Install dependencies
         run: |
@@ -27,7 +27,11 @@ jobs:
 
       - name: Run Ruff
         run: ruff .
-        if: always() # всегда запускать ruff
 
       - name: Check Ruff results
-        run: exit ${{ steps.run-ruff.outcome == 'success' ? 0 : 1 }}
+        run: |
+          ruff_exit_code=$?
+          if [[ $ruff_exit_code -ne 0 ]]; then
+            echo "Ruff found errors. Exiting with non-zero code."
+            exit $ruff_exit_code
+          fi
