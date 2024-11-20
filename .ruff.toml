@@ -1,6 +1,6 @@
 [ruff]
 line-length = 120
-target-version = "py311" # Match your Python version in the workflow
+target-version = "py312" # Match your Python version in the workflow
 
 [flake8]
 select = ["E", "W", "F", "C90"]
