@@ -1,0 +1,7 @@
+[ruff]
+line-length = 120
+target-version = "py310" # Или нужная версия
+
+[flake8]
+select = ["E", "W", "F", "C90"]
+ignore = ["E203", "W503"]
