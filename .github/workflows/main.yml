@@ -24,7 +24,7 @@ jobs:
           pip install ruff
       - name: Run Ruff
         run: |
-          find . -name "*.py" -print0 | xargs -0 ruff --fix --config .ruff.toml
+          ruff --fix --config .ruff.toml ./**/*.py
       - name: Check Ruff results
         run: |
           ruff_exit_code=$?
