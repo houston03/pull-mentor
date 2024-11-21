@@ -23,7 +23,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install ruff
       - name: Run Ruff
-        run: ruff check ./**/*.py --fix --config .ruff.toml
+        run: ruff --target-version=py312 --select=E,F,W,C90 --ignore=E203,W503 ./**/*.py --fix
       - name: Check Ruff results
         run: |
           ruff_exit_code=$?
